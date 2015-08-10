@@ -111,7 +111,7 @@ d3.csv("data/eu2.csv", function(csvData){
 
 
 		var radius = d3.scale.sqrt()
-		.domain([0, 1e6])
+		.domain([0, 1500000])
 		.range([0, 30]);
 
 		var states = map.selectAll(".states")
@@ -333,7 +333,7 @@ d3.csv("data/sa.csv", function(csvData){
 
 
 		var radius = d3.scale.sqrt()
-		.domain([0, 1e6])
+		.domain([0, 1500000])
 		.range([0, 30]);
 
 		var states = map4.selectAll(".states")
@@ -557,7 +557,7 @@ d3.csv("data/sa.csv", function(csvData){
 
 
 		var radius = d3.scale.sqrt()
-		.domain([0, 1e6])
+		.domain([0, 1500000])
 		.range([0, 30]);
 
 		var states = map7.selectAll(".states")
