@@ -58,6 +58,22 @@ function setMap(){
 			.append("svg")
 			.attr("width",width)
 			.attr("height",height);
+			
+	var map10= d3.select("#map10")
+			.append("svg")
+			.attr("width",width)
+			.attr("height",height);
+			
+	var map11= d3.select("#map11")
+			.append("svg")
+			.attr("width",width)
+			.attr("height",height);
+			
+	var map12= d3.select("#map12")
+			.append("svg")
+			.attr("width",width)
+			.attr("height",height);
+			
 
 	var projection = d3.geo.mercator()
     .scale((10000))
@@ -119,7 +135,7 @@ d3.csv("data/eu2.csv", function(csvData){
  		.enter()
  		.append("path")
  		.attr("class","states")
- 		.attr("fill","#67001f")
+ 		.attr("fill","#67000d")
  		.attr("opacity",0.7)
  		.attr("d",path);
  		
@@ -180,7 +196,7 @@ d3.csv("data/eu2.csv", function(csvData){
  		.enter()
  		.append("path")
  		.attr("class","states")
- 		.attr("fill","#b2182b")
+ 		.attr("fill","#a50f15")
  		.attr("opacity",0.7)
  		.attr("d",path);
  		
@@ -245,7 +261,7 @@ d3.csv("data/eu2.csv", function(csvData){
  		.enter()
  		.append("path")
  		.attr("class","states")
- 		.attr("fill","#d6604d")
+ 		.attr("fill","#cb181d")
  		.attr("opacity",0.7)
  		.attr("d",path);
  		
@@ -341,7 +357,7 @@ d3.csv("data/sa.csv", function(csvData){
  		.enter()
  		.append("path")
  		.attr("class","states")
- 		.attr("fill","#f4a582")
+ 		.attr("fill","#ef3b2c")
  		.attr("opacity",0.7)
  		.attr("d",path);
  		
@@ -405,7 +421,7 @@ d3.csv("data/sa.csv", function(csvData){
  		.enter()
  		.append("path")
  		.attr("class","states")
- 		.attr("fill","#fddbc7")
+ 		.attr("fill","#fb6a4a")
  		.attr("opacity",0.7)
  		.attr("d",path);
  		
@@ -470,7 +486,7 @@ d3.csv("data/sa.csv", function(csvData){
  		.enter()
  		.append("path")
  		.attr("class","states")
- 		.attr("fill","#bababa")
+ 		.attr("fill","#fcbba1")
  		.attr("opacity",0.7)
  		.attr("d",path);
  		
@@ -565,7 +581,7 @@ d3.csv("data/sa.csv", function(csvData){
  		.enter()
  		.append("path")
  		.attr("class","states")
- 		.attr("fill","#878787")
+ 		.attr("fill","#67000d")
  		.attr("opacity",0.7)
  		.attr("d",path);
  		
@@ -629,7 +645,7 @@ d3.csv("data/sa.csv", function(csvData){
  		.enter()
  		.append("path")
  		.attr("class","states")
- 		.attr("fill","#4d4d4d")
+ 		.attr("fill","#a50f15")
  		.attr("opacity",0.7)
  		.attr("d",path);
  		
@@ -694,7 +710,7 @@ d3.csv("data/sa.csv", function(csvData){
  		.enter()
  		.append("path")
  		.attr("class","states")
- 		.attr("fill","#1a1a1a")
+ 		.attr("fill","#cb181d")
  		.attr("opacity",0.7)
  		.attr("d",path);
  		
@@ -757,7 +773,232 @@ d3.csv("data/sa.csv", function(csvData){
  	});//end csv
 
 
+ 	d3.csv("data/world.csv", function(csvData){
+    d3.json("data/map.topojson", function(error,paraguay){
+
+  		var jsonRegions=paraguay.objects.states.geometries;
+ 			for (var a=0; a<jsonRegions.length;a++){
+ 					
+
+				for(var i=1;i<csvData.length;i++){//loop over the array of counties/rows /loop ove all rows
+						if(jsonRegions[a].properties.NAME_1==csvData[i].Department){
+ 							
+ 							jsonRegions[a].properties.Year2007=csvData[i].Year2007;
+ 							jsonRegions[a].properties.Year2010=csvData[i].Year2010;
+ 							jsonRegions[a].properties.Year2013=csvData[i].Year2013;
+ 						
+
+ 						};
+		
+ 			};	
+ 			
+ 			};
+
+
+		var radius = d3.scale.sqrt()
+		.domain([0, 1500000])
+		.range([0, 30]);
+
+		var states = map10.selectAll(".states")
+ 		.data(topojson.object(paraguay,paraguay.objects.states).geometries)
+ 		.enter()
+ 		.append("path")
+ 		.attr("class","states")
+ 		.attr("fill","#ef3b2c")
+ 		.attr("opacity",0.7)
+ 		.attr("d",path);
+ 		
+ 		map10.append("g")
+    	.attr("class", "bubble")
+  		.selectAll("circle")
+    	.data(topojson.object(paraguay,paraguay.objects.states).geometries)
+  		.enter().append("circle")
+    	.attr("transform", function(d) { return "translate(" + path.centroid(d) + ")"; })
+   		.attr("r", function(d) { if(d.properties.Year2007){
+   		 				return radius(d.properties.Year2007);
+   		 				}
+   		 			 })
+   		.attr("id",function(d){
+   		 	var finalId= d.properties.NAME_1.replace(" ","");
+			finalId = finalId.replace(" ","");
+			finalId = finalId.replace(".","");
+			finalId = finalId+"10";
+			return finalId;
+   		 
+   		 })
+   		.on('mouseover',function(d){
+   	
+			var finalId= d.properties.NAME_1.replace(" ","");
+			finalId = finalId.replace(" ","");
+			finalId = finalId.replace(".","");
+			finalId = finalId+"10";
+			
+			d3.select("#"+finalId)//select the current county in the dome	
+			.style("opacity", 0.5);
+			
+			var labelAttribute = "<h4> Soy Export: "+d.properties.Year2007+" tons <br> Department: "+
+									d.properties.NAME_1+"</h4>";
+	
+
+	
+			var infolabel=d3.select("#tooltip4").append("div")
+				.attr("class","infolabel")
+				.attr("id", finalId+"label")
+				.html(labelAttribute);
+   		 	
+   		 
+   		 })
+   		.on("mouseout",function(d){
+   		 
+   		 		var finalId= d.properties.NAME_1.replace(" ","");
+					finalId = finalId.replace(" ","");
+					finalId = finalId.replace(".","");
+					finalId = finalId+"10";
+   		 		d3.select("#"+finalId+"label").remove(); 
+   		 		
+   		 		d3.select("#"+finalId)//select the current county in the dome	
+				.style("opacity", 0.8);
+   		 });
+ 		
+ 		
+ 		
+ 		var states2 = map11.selectAll(".states")
+ 		.data(topojson.object(paraguay,paraguay.objects.states).geometries)
+ 		.enter()
+ 		.append("path")
+ 		.attr("class","states")
+ 		.attr("fill","#fb6a4a")
+ 		.attr("opacity",0.7)
+ 		.attr("d",path);
+ 		
+ 		
+ 		map11.append("g")
+    	.attr("class", "bubble")
+  		.selectAll("circle")
+    	.data(topojson.object(paraguay,paraguay.objects.states).geometries)
+  		.enter().append("circle")
+    	.attr("transform", function(d) { return "translate(" + path.centroid(d) + ")"; })
+   		.attr("r", function(d) { if(d.properties.Year2010){
+   		 				return radius(d.properties.Year2010);
+   		 				}
+   		 			 })
+   		 .attr("id",function(d){
+   		 	var finalId= d.properties.NAME_1.replace(" ","");
+			finalId = finalId.replace(" ","");
+			finalId = finalId.replace(".","");
+			finalId = finalId+"11";
+			return finalId;
+   		 
+   		 })
+   		.on('mouseover',function(d){
+   	
+			var finalId= d.properties.NAME_1.replace(" ","");
+			finalId = finalId.replace(" ","");
+			finalId = finalId.replace(".","");
+			finalId = finalId+"11";
+			
+			d3.select("#"+finalId)//select the current county in the dome	
+			.style("opacity", 0.5);
+			
+			var labelAttribute = "<h4> Soy Export: "+d.properties.Year2010+" tons <br> Department: "+
+									d.properties.NAME_1+"</h4>";
+	
+
+	
+			var infolabel=d3.select("#tooltip4").append("div")
+				.attr("class","infolabel")
+				.attr("id", finalId+"label")
+				.html(labelAttribute);
+   		 	
+   		 
+   		 })
+   		.on("mouseout",function(d){
+   		 
+   		 		var finalId= d.properties.NAME_1.replace(" ","");
+					finalId = finalId.replace(" ","");
+					finalId = finalId.replace(".","");
+					finalId = finalId+"11";
+   		 		d3.select("#"+finalId+"label").remove(); 
+   		 		
+   		 		d3.select("#"+finalId)//select the current county in the dome	
+				.style("opacity", 0.8);
+   		 });
+   		
+   		
+ 		
+ 		var states3 = map12.selectAll(".states")
+ 		.data(topojson.object(paraguay,paraguay.objects.states).geometries)
+ 		.enter()
+ 		.append("path")
+ 		.attr("class","states")
+ 		.attr("fill","#fcbba1")
+ 		.attr("opacity",0.7)
+ 		.attr("d",path);
+ 		
+ 		
+ 		map12.append("g")
+    	.attr("class", "bubble")
+  		.selectAll("circle")
+    	.data(topojson.object(paraguay,paraguay.objects.states).geometries)
+  		.enter().append("circle")
+    	.attr("transform", function(d) { return "translate(" + path.centroid(d) + ")"; })
+   		.attr("r", function(d) { if(d.properties.Year2013){
+   		 				return radius(d.properties.Year2013);
+   		 				}
+   		 			 })
+   		 .attr("id",function(d){
+   		 	var finalId= d.properties.NAME_1.replace(" ","");
+			finalId = finalId.replace(" ","");
+			finalId = finalId.replace(".","");
+			finalId = finalId+"12";
+			return finalId;
+   		 
+   		 })
+   		.on('mouseover',function(d){
+   	
+			var finalId= d.properties.NAME_1.replace(" ","");
+			finalId = finalId.replace(" ","");
+			finalId = finalId.replace(".","");
+			finalId = finalId+"12";
+			
+			d3.select("#"+finalId)//select the current county in the dome	
+			.style("opacity", 0.5);
+			
+			var labelAttribute = "<h4> Soy Export: "+d.properties.Year2013+" tons <br> Department: "+
+									d.properties.NAME_1+"</h4>";
+	
+
+	
+			var infolabel=d3.select("#tooltip4").append("div")
+				.attr("class","infolabel")
+				.attr("id", finalId+"label")
+				.html(labelAttribute);
+   		 	
+   		 
+   		 })
+   		.on("mouseout",function(d){
+   		 
+   		 		var finalId= d.properties.NAME_1.replace(" ","");
+					finalId = finalId.replace(" ","");
+					finalId = finalId.replace(".","");
+					finalId = finalId+"12";
+   		 		d3.select("#"+finalId+"label").remove(); 
+   		 		
+   		 		d3.select("#"+finalId)//select the current county in the dome	
+				.style("opacity", 0.8);
+   		 });
+ 		
+
+		});//end json
+ 	});//end csv
+
+
+
  }//end setmap
+ 
+ 
+ 
+ 
  
  
   function moveToFront() { 
