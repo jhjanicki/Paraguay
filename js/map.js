@@ -196,7 +196,7 @@ d3.csv("data/eu2.csv", function(csvData){
  		.enter()
  		.append("path")
  		.attr("class","states")
- 		.attr("fill","#a50f15")
+ 		.attr("fill","#ef3b2c")
  		.attr("opacity",0.7)
  		.attr("d",path);
  		
@@ -261,7 +261,7 @@ d3.csv("data/eu2.csv", function(csvData){
  		.enter()
  		.append("path")
  		.attr("class","states")
- 		.attr("fill","#cb181d")
+ 		.attr("fill","#fb6a4a")
  		.attr("opacity",0.7)
  		.attr("d",path);
  		
@@ -357,7 +357,7 @@ d3.csv("data/sa.csv", function(csvData){
  		.enter()
  		.append("path")
  		.attr("class","states")
- 		.attr("fill","#ef3b2c")
+ 		.attr("fill","#67000d")
  		.attr("opacity",0.7)
  		.attr("d",path);
  		
@@ -421,7 +421,7 @@ d3.csv("data/sa.csv", function(csvData){
  		.enter()
  		.append("path")
  		.attr("class","states")
- 		.attr("fill","#fb6a4a")
+ 		.attr("fill","#ef3b2c")
  		.attr("opacity",0.7)
  		.attr("d",path);
  		
@@ -486,7 +486,7 @@ d3.csv("data/sa.csv", function(csvData){
  		.enter()
  		.append("path")
  		.attr("class","states")
- 		.attr("fill","#fcbba1")
+ 		.attr("fill","#fb6a4a")
  		.attr("opacity",0.7)
  		.attr("d",path);
  		
@@ -645,7 +645,7 @@ d3.csv("data/sa.csv", function(csvData){
  		.enter()
  		.append("path")
  		.attr("class","states")
- 		.attr("fill","#a50f15")
+ 		.attr("fill","#ef3b2c")
  		.attr("opacity",0.7)
  		.attr("d",path);
  		
@@ -710,7 +710,7 @@ d3.csv("data/sa.csv", function(csvData){
  		.enter()
  		.append("path")
  		.attr("class","states")
- 		.attr("fill","#cb181d")
+ 		.attr("fill","#fb6a4a")
  		.attr("opacity",0.7)
  		.attr("d",path);
  		
@@ -804,7 +804,7 @@ d3.csv("data/sa.csv", function(csvData){
  		.enter()
  		.append("path")
  		.attr("class","states")
- 		.attr("fill","#ef3b2c")
+ 		.attr("fill","#67000d")
  		.attr("opacity",0.7)
  		.attr("d",path);
  		
@@ -867,7 +867,7 @@ d3.csv("data/sa.csv", function(csvData){
  		.enter()
  		.append("path")
  		.attr("class","states")
- 		.attr("fill","#fb6a4a")
+ 		.attr("fill","#ef3b2c")
  		.attr("opacity",0.7)
  		.attr("d",path);
  		
@@ -931,7 +931,7 @@ d3.csv("data/sa.csv", function(csvData){
  		.enter()
  		.append("path")
  		.attr("class","states")
- 		.attr("fill","#fcbba1")
+ 		.attr("fill","#fb6a4a")
  		.attr("opacity",0.7)
  		.attr("d",path);
  		
